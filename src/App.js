@@ -1,23 +1,28 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import CameraButton from './CameraButton';
+import GalleryButton from './GalleryButton';
+import ImagePlaceholder from './ImagePlaceholder';
 import './App.css';
 
 function App() {
+  const [image, setImage] = useState(null);
+
+  const handleCapture = (newImage) => {
+    setImage(newImage);
+  };
+
+  const handleSelect = (newImage) => {
+    setImage(newImage);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ImagePlaceholder image={image} />
+
+      <div className="button-container">
+        <CameraButton onCapture={handleCapture} />
+        <GalleryButton onSelect={handleSelect} />
+      </div>
     </div>
   );
 }
