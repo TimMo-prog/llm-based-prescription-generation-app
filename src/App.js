@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import CameraButton from './CameraButton';
 import GalleryButton from './GalleryButton';
 import ImagePlaceholder from './ImagePlaceholder';
+import MenuButton from './MenuButton';
 import './App.css';
 
 function App() {
@@ -15,10 +16,17 @@ function App() {
     setImage(newImage);
   };
 
+  const handleMenuClick = () => {
+    console.log('Menu clicked');
+  };
+
   return (
     <div className="App">
+      <header className="App-header">
+        <MenuButton onClick={handleMenuClick} /> 
+        Welcoming
+      </header>
       <ImagePlaceholder image={image} />
-
       <div className="button-container">
         <CameraButton onCapture={handleCapture} />
         <GalleryButton onSelect={handleSelect} />

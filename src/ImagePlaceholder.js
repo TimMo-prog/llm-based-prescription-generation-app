@@ -1,4 +1,3 @@
-
 import React from 'react';
 import placeholderImage from './placeholderImage.webp'; 
 
