@@ -1,16 +1,19 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; 
 import CameraButton from './CameraButton';
 import GalleryButton from './GalleryButton';
 import MenuButton from './MenuButton';
 import ImagePlaceholder from './ImagePlaceholder';
 import loadingImage from './unicorn-hug.gif';
 import downloadIcon from './download-icon.webp'; 
+import cameraIcon from './camera_icon.png'; 
 import './App.css';
 
 function App() {
   const [image, setImage] = useState(null);
   const [loading, setLoading] = useState(false);
   const [uploadedImageUrl, setUploadedImageUrl] = useState(null);
+  const navigate = useNavigate(); 
 
   const downloadImage = () => {
     if (uploadedImageUrl) {
@@ -23,13 +26,19 @@ function App() {
     }
   };
 
-  const handleImageUpload = (imageUrl) => {
-    setLoading(false);
-    setUploadedImageUrl(imageUrl);
+  const handleImageUpload = () => {
+    setLoading(true); 
+    navigate('/loading');
+    // setTimeout(() => { 
+    //   setLoading(false);
+    //   // setUploadedImageUrl(imageUrl);
+    //   console.log("Navitgting");
+       
+    // }, 2000); 
   };
 
   const handleSelect = (newImage) => {
-    // Implement selection logic
+    setImage(newImage);
   };
 
   const handleMenuClick = () => {
@@ -61,7 +70,16 @@ function App() {
         <>
           <ImagePlaceholder image={image} />
           <div className="button-container">
-            <CameraButton onCapture={handleImageUpload} /> 
+                <label className="camera-button">
+      <input
+        type="file"
+        accept="image/*"
+        capture="environment"
+        onClick={handleImageUpload} 
+        style={{ display: 'none' }}
+      />
+      <img src={cameraIcon} alt="Camera" />
+    </label>
             <GalleryButton onSelect={handleSelect} />
           </div>
         </>
